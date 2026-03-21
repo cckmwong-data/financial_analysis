@@ -2,19 +2,19 @@ name: Financial Data Update
 
 on:
   schedule:
-    - cron: '0 13 * * 1-5'
-  workflow_dispatch:
+    - cron: '0 13 * * 1-5' # Runs at 1:00 PM UTC every Monday-Friday (Market hours)
+  workflow_dispatch:      # Adds a "Run" button so you can test it manually
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # This forces the runner to use Node 24 and should silence the warning
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
